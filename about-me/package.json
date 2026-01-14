@@ -1,7 +1,7 @@
 {
-  "name": "zehui-wang-portfolio",
+  "name": "zehui-wang-about-me",
   "version": "1.0.0",
-  "description": "A modern, interactive portfolio website showcasing skills and experience as a Senior Golang Backend Engineer",
+  "description": "A modern, interactive portfolio website",
   "main": "index.html",
   "scripts": {
     "start": "serve .",
@@ -10,7 +10,6 @@
     "deploy": "gh-pages -d ."
   },
   "keywords": [
-    "portfolio",
     "resume",
     "golang",
     "backend-engineer",
@@ -26,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wangtonyz/zehui-wang-portfolio.git"
+    "url": "https://github.com/wangtonyz/wangtonyz.github.io.git"
   },
   "bugs": {
-    "url": "https://github.com/wangtonyz/zehui-wang-portfolio/issues"
+    "url": "https://github.com/wangtonyz/wangtonyz.github.io/issues"
   },
-  "homepage": "https://wangtonyz.github.io"
+  "homepage": "https://wangtonyz.github.io/about-me"
 }
