@@ -1,8 +1,5 @@
 // Initialize the portfolio website
 document.addEventListener('DOMContentLoaded', function() {
-    // Animate skill bars when they come into view
-    animateSkillBars();
-    
     // Add scroll animations
     addScrollAnimations();
     
@@ -19,38 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLanguageToggle();
 });
 
-// Animate skill bars when they come into view
-function animateSkillBars() {
-    const skillLevels = document.querySelectorAll('.skill-level');
-    
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const skillLevel = entry.target;
-                const percentage = skillLevel.getAttribute('data-skill');
-                skillLevel.style.width = percentage + '%';
-                
-                // Add a slight delay for the animation
-                setTimeout(() => {
-                    skillLevel.style.transition = 'width 2s cubic-bezier(0.65, 0, 0.35, 1)';
-                }, 100);
-                
-                // Remove observer after animation starts
-                skillObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    skillLevels.forEach(skill => {
-        skillObserver.observe(skill);
-    });
-}
-
 // Add scroll animations for sections
 function addScrollAnimations() {
     const sections = document.querySelectorAll('section');
@@ -61,7 +26,7 @@ function addScrollAnimations() {
                 entry.target.classList.add('fade-in');
                 
                 // Add staggered animation delays for elements within the section
-                const childElements = entry.target.querySelectorAll('h2, .education-card, .skill-category, .timeline-item, .summary-item');
+                const childElements = entry.target.querySelectorAll('h2, .education-card, .skill-category, .skill-category-large, .timeline-item, .summary-item');
                 childElements.forEach((el, index) => {
                     el.style.animationDelay = `${index * 0.1}s`;
                     el.classList.add('delay-' + (index % 4 + 1));
@@ -85,7 +50,7 @@ function initTerminalEffect() {
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const texts = [
         'Cloud Native • Microservices • Distributed Systems',
-        'Kubernetes • Docker • Go • Backend Engineering',
+        'Kubernetes • Docker • Cloud Engineering',
         'Open Source Contributor • Tech Enthusiast',
         'Problem Solver • Continuous Learner'
     ];
