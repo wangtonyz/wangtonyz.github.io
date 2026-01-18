@@ -12,7 +12,6 @@ export const HeroSection: React.FC = () => {
   const { hero } = portfolioData;
   const [currentSubtitle, setCurrentSubtitle] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
 
   const typeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const charIndexRef = useRef(0);
@@ -46,7 +45,6 @@ export const HeroSection: React.FC = () => {
         } else {
           // Finished typing, pause before deleting
           pauseRef.current = true;
-          setIsTyping(false);
           typeTimeoutRef.current = setTimeout(type, 2000);
         }
       } else {
@@ -60,7 +58,6 @@ export const HeroSection: React.FC = () => {
         } else {
           // Finished deleting, pause before typing next
           pauseRef.current = true;
-          setIsTyping(true);
           typeTimeoutRef.current = setTimeout(type, 300);
         }
       }
