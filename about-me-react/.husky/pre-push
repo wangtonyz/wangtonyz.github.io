@@ -1,6 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # pre-push hook: 验证commit消息格式和更新CHANGELOG
 echo "🔍 检查commit消息格式..."
 
