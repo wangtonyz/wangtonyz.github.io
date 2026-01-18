@@ -1,0 +1,18 @@
+#!/bin/sh
+# commit-msg hook: 验证提交消息格式
+# 支持从项目根目录或子目录提交
+
+# 获取 git 仓库根目录
+GIT_ROOT="$(git rev-parse --show-toplevel)"
+
+# 检查 commitlint.config.js 的位置
+if [ -f "$GIT_ROOT/commitlint.config.js" ]; then
+  # 根目录有配置
+  npx commitlint --config "$GIT_ROOT/commitlint.config.js" --edit
+elif [ -f "commitlint.config.js" ]; then
+  # 当前目录有配置
+  npx commitlint --config commitlint.config.js --edit
+else
+  # 使用默认配置
+  npx commitlint --edit
+fi
