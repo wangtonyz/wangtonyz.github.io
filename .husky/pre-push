@@ -1,26 +1,15 @@
 #!/bin/sh
-# pre-push hook: 验证commit消息格式
-echo "🔍 检查commit消息格式..."
+# pre-push hook: push 前的最后安全检查
+# 注意: commit-msg hook 已通过 commitlint 验证消息格式
 
-# 获取最后一条commit消息
-COMMIT_MSG=$(git log -1 --pretty=%B)
+echo "🔍 push 前安全检查..."
 
-# 检查commit消息是否符合Conventional Commits格式
-if ! echo "$COMMIT_MSG" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|chore|ci)(\(.+\))?:'; then
-  echo "❌ Commit消息格式不符合规范！"
-  echo "请使用以下格式："
-  echo "  feat(scope): 新功能描述"
-  echo "  fix(scope): 修复bug描述"
-  echo "  docs: 文档变化"
-  echo "  style: 代码风格变化"
-  echo "  refactor: 代码重构"
-  echo "  perf: 性能优化"
-  echo "  test: 添加测试"
-  echo "  chore: 构建或依赖变化"
-  echo "  ci: CI配置变化"
+# 简单检查本地是否有未提交的改动
+if [ -n "$(git status --porcelain)" ]; then
+  echo "⚠️ 工作区有未提交的改动，请先提交"
+  git status
   exit 1
 fi
 
-echo "✅ Commit消息格式正确"
-echo "✅ push前检查完成，继续提交..."
+echo "✅ push 前检查完成"
 exit 0

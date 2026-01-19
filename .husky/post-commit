@@ -1,33 +1,33 @@
 #!/bin/sh
 # post-commit hook: 提交后自动更新CHANGELOG
-# 注意: 仅在非amend操作时执行，避免死循环
+# 由 cz-conventional-changelog 统一管理
 
-# 检查是否已经处于amend状态（通过环境变量防止递归）
+# 防止递归 amend 导致的无限循环
 if [ "$GIT_AMEND_IN_PROGRESS" = "1" ]; then
   exit 0
 fi
 
-# 检查是否在merge/rebase/amend过程中
+# 检查是否在 merge/rebase/amend 过程中
 if [ -d "$(git rev-parse --git-dir)/rebase-merge" ] || \
    [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
   exit 0
 fi
 
-echo "📝 正在更新CHANGELOG.md..."
+echo "📝 正在更新 CHANGELOG.md..."
 
-# 使用conventional-changelog更新CHANGELOG
-if command -v npx &> /dev/null; then
-  npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0 2>/dev/null
-  
-  if [ $? -eq 0 ]; then
-    # 检查CHANGELOG是否有变化
-    if git diff CHANGELOG.md | grep -q .; then
-      echo "✅ CHANGELOG.md已更新"
-      git add CHANGELOG.md
-      GIT_AMEND_IN_PROGRESS=1 git commit --amend --no-edit --no-verify 2>/dev/null
-      echo "✅ CHANGELOG已合并到当前提交"
-    fi
+# 使用 conventional-changelog-cli 生成 CHANGELOG
+npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0 2>/dev/null
+
+if [ $? -eq 0 ]; then
+  # 检查 CHANGELOG 是否有变化
+  if git diff CHANGELOG.md | grep -q .; then
+    echo "✅ CHANGELOG.md 已更新"
+    git add CHANGELOG.md
+    GIT_AMEND_IN_PROGRESS=1 git commit --amend --no-edit --no-verify 2>/dev/null
+    echo "✅ CHANGELOG 已并入当前提交"
   fi
+else
+  echo "⚠️ CHANGELOG 更新失败，继续提交"
 fi
 
 exit 0
