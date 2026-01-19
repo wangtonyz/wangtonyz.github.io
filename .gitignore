@@ -238,7 +238,7 @@ yarn.lock
 *.md
 !README.md
 !LICENSE
-!CLAUDE.md
+!CHANGELOG.md
 
 # Backup files
 *_backup.*
