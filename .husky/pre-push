@@ -1,5 +1,5 @@
 #!/bin/sh
-# pre-push hook: 验证commit消息格式和更新CHANGELOG
+# pre-push hook: 验证commit消息格式
 echo "🔍 检查commit消息格式..."
 
 # 获取最后一条commit消息
@@ -22,28 +22,5 @@ if ! echo "$COMMIT_MSG" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|cho
 fi
 
 echo "✅ Commit消息格式正确"
-
-# 检查是否存在CHANGELOG.md，如果不存在则创建
-if [ ! -f "CHANGELOG.md" ]; then
-  echo "📝 创建CHANGELOG.md..."
-  > CHANGELOG.md
-fi
-
-echo "📝 更新CHANGELOG.md..."
-
-# 使用conventional-changelog更新CHANGELOG
-if command -v npx &> /dev/null; then
-  npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0 2>/dev/null
-  
-  if [ $? -eq 0 ]; then
-    echo "✅ CHANGELOG.md已自动更新"
-    # 如果CHANGELOG有改动，添加到staging
-    if git diff CHANGELOG.md | grep -q .; then
-      git add CHANGELOG.md
-      echo "✅ CHANGELOG.md已加入到本次push"
-    fi
-  fi
-fi
-
 echo "✅ push前检查完成，继续提交..."
 exit 0
