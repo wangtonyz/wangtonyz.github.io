@@ -2,8 +2,14 @@
 # post-commit hook: 提交后自动更新CHANGELOG
 # 注意: 仅在非amend操作时执行，避免死循环
 
-# 检查是否是amend操作
-if git diff --cached --name-only | grep -q .; then
+# 检查是否已经处于amend状态（通过环境变量防止递归）
+if [ "$GIT_AMEND_IN_PROGRESS" = "1" ]; then
+  exit 0
+fi
+
+# 检查是否在merge/rebase/amend过程中
+if [ -d "$(git rev-parse --git-dir)/rebase-merge" ] || \
+   [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
   exit 0
 fi
 
@@ -18,7 +24,7 @@ if command -v npx &> /dev/null; then
     if git diff CHANGELOG.md | grep -q .; then
       echo "✅ CHANGELOG.md已更新"
       git add CHANGELOG.md
-      git commit --amend --no-edit --no-verify 2>/dev/null
+      GIT_AMEND_IN_PROGRESS=1 git commit --amend --no-edit --no-verify 2>/dev/null
       echo "✅ CHANGELOG已合并到当前提交"
     fi
   fi

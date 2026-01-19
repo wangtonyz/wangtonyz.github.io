@@ -1,8 +1,9 @@
 ## 1.0.0 (2026-01-19)
 
 * docs: :memo: add docs ([0c5f405](https://github.com/wangtonyz/wangtonyz.github.io/commit/0c5f405))
-* docs: add docs ([f2ef857](https://github.com/wangtonyz/wangtonyz.github.io/commit/f2ef857))
+* docs: add docs ([4eea3cc](https://github.com/wangtonyz/wangtonyz.github.io/commit/4eea3cc))
 * docs: update git flow guide - remove references to subproject husky configuration ([991f45f](https://github.com/wangtonyz/wangtonyz.github.io/commit/991f45f))
+* docs(add docs): add docs ([80f1f82](https://github.com/wangtonyz/wangtonyz.github.io/commit/80f1f82))
 * chore: remove husky configuration from about-me-react subproject ([bfdbeb9](https://github.com/wangtonyz/wangtonyz.github.io/commit/bfdbeb9))
 * chore: setup husky git hooks ([a0fdac4](https://github.com/wangtonyz/wangtonyz.github.io/commit/a0fdac4))
 * chore(git-flow): move husky configuration to project root for global management ([01890f1](https://github.com/wangtonyz/wangtonyz.github.io/commit/01890f1))
