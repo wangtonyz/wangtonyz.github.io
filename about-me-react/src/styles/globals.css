@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary-color: #00d4ff;
-    --secondary-color: #00ff88;
+    --primary-color: #007CF0;
+    --secondary-color: #00DFD8;
     --accent-color: #ff00aa;
     --dark-bg: #0a0a0a;
     --darker-bg: #000000;
@@ -22,6 +22,9 @@
     --transition-speed: 0.3s;
     --mobile-breakpoint: 768px;
     --tablet-breakpoint: 1024px;
+    
+    /* Premium gradient for text */
+    --premium-gradient: linear-gradient(135deg, #007CF0, #00DFD8);
 }
 
 /* SVG Icon Styles */
@@ -34,7 +37,7 @@
 
 /* Global Typography */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     background: var(--dark-bg);
     color: var(--text-primary);
     overflow-x: hidden;
@@ -42,8 +45,19 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Fira Code', monospace;
-    font-weight: 500;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+/* Premium Text Effect - Gradient with glow */
+.premium-text {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 900;
+    background: var(--premium-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 15px rgba(0, 223, 216, 0.2));
 }
 
 /* Animation Classes */
@@ -106,21 +120,22 @@ h1, h2, h3, h4 {
 
 .hero-name {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
+    font-weight: 900;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background: var(--premium-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: fadeInUp 0.8s ease-out, glow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(0, 223, 216, 0.3));
 }
 
 @keyframes glow {
     from {
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        filter: drop-shadow(0 0 10px rgba(0, 124, 240, 0.4));
     }
     to {
-        text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
+        filter: drop-shadow(0 0 20px rgba(0, 223, 216, 0.6));
     }
 }
 
@@ -197,20 +212,42 @@ h1, h2, h3, h4 {
     left: 50%;
     transform: translateX(-50%);
     color: var(--primary-color);
-    animation: bounce 2s infinite;
     cursor: pointer;
     z-index: 1000;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0) translateX(-50%);
+/* Mouse Scroll Indicator */
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--primary-color);
+    border-radius: 13px;
+    position: relative;
+    background: rgba(0, 124, 240, 0.1);
+    box-shadow: 0 0 15px rgba(0, 124, 240, 0.3);
+}
+
+.mouse .wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 1.5s ease-in-out infinite;
+    box-shadow: 0 0 5px rgba(0, 124, 240, 0.8);
+}
+
+@keyframes scroll-wheel {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
-    40% {
-        transform: translateY(-20px) translateX(-50%);
-    }
-    60% {
-        transform: translateY(-10px) translateX(-50%);
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(16px);
     }
 }
 
@@ -223,16 +260,18 @@ section {
 }
 
 .section-header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 3rem;
     position: relative;
+    min-height: 60px;
 }
 
 .section-header h2 {
     font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    font-weight: 800;
+    background: var(--premium-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -240,6 +279,8 @@ section {
     align-items: center;
     gap: 10px;
     position: relative;
+    filter: drop-shadow(0 0 12px rgba(0, 124, 240, 0.2));
+    margin: 0;
 }
 
 .section-header h2::after {
@@ -257,7 +298,8 @@ section {
 .language-toggle {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .lang-btn {
@@ -277,7 +319,7 @@ section {
 
 /* About Section */
 .about-section {
-    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+    background: transparent;
 }
 
 .education-card {
@@ -307,7 +349,7 @@ section {
 
 /* Skills Section */
 .skills-section {
-    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+    background: transparent;
 }
 
 .skills-container {
@@ -363,13 +405,14 @@ section {
 
 /* Experience Section */
 .experience-section {
-    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+    background: transparent;
 }
 
 .timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
+    padding-left: 40px;
 }
 
 .timeline::before {
@@ -379,28 +422,19 @@ section {
     bottom: 0;
     width: 2px;
     background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
 }
 
 .timeline-item {
     position: relative;
-    width: calc(50% - 40px);
-    margin-bottom: 3rem;
+    width: 100%;
+    margin-bottom: 2rem;
     padding: 1.5rem;
     background: var(--card-bg);
     border-radius: var(--border-radius);
     border: 1px solid rgba(0, 212, 255, 0.1);
     cursor: pointer;
     transition: all var(--transition-speed);
-}
-
-.timeline-item:nth-child(odd) {
-    left: 0;
-}
-
-.timeline-item:nth-child(even) {
-    left: calc(50% + 40px);
 }
 
 .timeline-item:hover {
@@ -410,11 +444,12 @@ section {
 
 .timeline-marker {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background: var(--primary-color);
     border-radius: 50%;
     top: 1.5rem;
+    left: -28px;
     border: 3px solid var(--dark-bg);
     box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
     animation: pulse 2s infinite;
@@ -430,14 +465,6 @@ section {
     100% {
         box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
     }
-}
-
-.timeline-item:nth-child(odd) .timeline-marker {
-    right: -50px;
-}
-
-.timeline-item:nth-child(even) .timeline-marker {
-    left: -50px;
 }
 
 .job-header {
@@ -502,7 +529,7 @@ section {
 
 /* Summary Section */
 .summary-section {
-    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+    background: transparent;
 }
 
 .summary-content {
@@ -534,7 +561,7 @@ section {
 
 /* Footer */
 .footer {
-    background: var(--darker-bg);
+    background: transparent;
     padding: 2rem 0;
     text-align: center;
     margin-top: auto;
@@ -566,27 +593,16 @@ section {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+    .timeline {
+        padding-left: 40px;
+    }
+
     .timeline::before {
-        left: 30px;
-    }
-
-    .timeline-item {
-        width: calc(100% - 70px);
-        margin-left: 70px;
-    }
-
-    .timeline-item:nth-child(even) {
-        left: 0;
+        left: 20px;
     }
 
     .timeline-marker {
-        left: -40px;
-        right: auto;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-marker,
-    .timeline-item:nth-child(even) .timeline-marker {
-        left: -40px;
+        left: -28px;
     }
 }
 
@@ -596,13 +612,24 @@ section {
     }
 
     .hero-contact {
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
         align-items: center;
     }
 
+    .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
     .section-header h2 {
         font-size: 1.8rem;
+    }
+
+    .language-toggle {
+        position: static;
+        transform: none;
     }
 
     .skills-container {
@@ -627,7 +654,7 @@ section {
 
 /* Highlight Link */
 .highlight-link {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background: var(--premium-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -645,13 +672,12 @@ section {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: var(--premium-gradient);
     transition: width 0.3s ease;
 }
 
 .highlight-link:hover {
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-    filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.3));
+    filter: drop-shadow(0 0 8px rgba(0, 223, 216, 0.4));
 }
 
 .highlight-link:hover::after {

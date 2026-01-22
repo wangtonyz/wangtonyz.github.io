@@ -1,6 +1,7 @@
-## 1.0.0 (2026-01-19)
+## 1.0.0 (2026-01-22)
 
-* feat: a new feature ([c2819e1](https://github.com/wangtonyz/wangtonyz.github.io/commit/c2819e1))
+* feat: a new feature ([4d0cc2c](https://github.com/wangtonyz/wangtonyz.github.io/commit/4d0cc2c))
+* feat: add canvas-based particle background animation component ([c6f50e2](https://github.com/wangtonyz/wangtonyz.github.io/commit/c6f50e2))
 * feat: add missing reportWebVitals file ([fb5e9dd](https://github.com/wangtonyz/wangtonyz.github.io/commit/fb5e9dd))
 * feat: test husky hook ([7df7b14](https://github.com/wangtonyz/wangtonyz.github.io/commit/7df7b14))
 * docs: :memo: add docs ([0c5f405](https://github.com/wangtonyz/wangtonyz.github.io/commit/0c5f405))

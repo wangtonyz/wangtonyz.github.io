@@ -101,10 +101,6 @@ export const HeroSection: React.FC = () => {
             </a>
           ))}
         </div>
-
-        <div className="scroll-indicator">
-          <i className="fas fa-chevron-down"></i>
-        </div>
       </div>
     </section>
   );

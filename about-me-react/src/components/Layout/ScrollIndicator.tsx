@@ -34,7 +34,7 @@ export const ScrollIndicator: React.FC = () => {
 
   return (
     <div
-      className="scroll-indicator"
+      className="scroll-indicator mouse-indicator"
       style={{
         opacity: isVisible ? 1 : 0,
         pointerEvents: isVisible ? 'auto' : 'none',
@@ -47,7 +47,9 @@ export const ScrollIndicator: React.FC = () => {
       }}
       onClick={scrollToNextSection}
     >
-      <i className="fas fa-chevron-down"></i>
+      <div className="mouse">
+        <div className="wheel"></div>
+      </div>
     </div>
   );
 };
